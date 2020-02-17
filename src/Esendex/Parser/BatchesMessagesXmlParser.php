@@ -47,13 +47,13 @@ class BatchesMessagesXmlParser
 
     public function parseHeader($header)
     {
-        //dd($header);
         $result = array();
-        foreach ($header->messagebatch as $message) {
-            //dd($message);
+
+        foreach ($header->messageheader as $message) {
             $item = new BatchesMessage();
             $item->status($message->status);
             $item->id($message['id']);
+            $item->phonenumber($message->to->phonenumber);
             $result[] = $item;
         }
         return $result;

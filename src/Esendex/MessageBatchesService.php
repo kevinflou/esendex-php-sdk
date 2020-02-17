@@ -36,7 +36,7 @@ namespace Esendex;
 
 class MessageBatchesService
 {
-    const SERVICE = "messagebatches";
+    const SERVICE = "messageheaders";
     const SERVICE_VERSION = "v1.1";
 
     private $authentication;
@@ -74,7 +74,7 @@ class MessageBatchesService
         $uri = Http\UriBuilder::serviceUri(
             self::SERVICE_VERSION,
             self::SERVICE,
-            null,
+            $messageId != null ? array($messageId,'messages') : null,
             $this->httpClient->isSecure()
         );
 
