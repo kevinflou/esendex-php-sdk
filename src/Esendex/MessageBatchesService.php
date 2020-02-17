@@ -78,8 +78,6 @@ class MessageBatchesService
             $this->httpClient->isSecure()
         );
 
-        dd($uri);
-
         $result = $this->httpClient->get(
             $uri,
             $this->authentication
