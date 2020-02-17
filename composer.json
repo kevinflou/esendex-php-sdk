@@ -1,5 +1,5 @@
 {
-    "name": "esendex/sdk",
+    "name": "kevin-esendex/sdk",
     "description": "Send SMS from your application using the Esendex API",
     "homepage": "http://developers.esendex.com",
     "keywords": ["sms", "rest", "restful", "api", "requests"],
