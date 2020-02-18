@@ -2,7 +2,7 @@
 /**
  * Copyright (c) 2019, Commify Ltd.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
  *     * Neither the name of Commify nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -36,6 +36,7 @@ namespace Esendex\Parser;
 
 use Esendex\Model\Account;
 use Esendex\Model\Api;
+use Esendex\Model\Contact;
 
 class ContactXmlParser
 {
@@ -43,13 +44,33 @@ class ContactXmlParser
     {
         $doc = new \SimpleXMLElement("<?xml version=\"1.0\" encoding=\"utf-8\"?><contact />", 0, false, Api::NS);
         $doc->addAttribute("xmlns", Api::NS);
-        $doc->contact->addChild("firstname",$firstname);
-        $doc->contact->addChild("lastname",$lastname);
-        $doc->contact->addChild("quickname",$quickname);
-        $doc->contact->addChild("phonenumber",$phonenumber);
-        $doc->contact->addChild("accountreference",$accountreference);
-
+        $doc->addChild("firstname",$firstname);
+        $doc->addChild("lastname",$lastname);
+        $doc->addChild("quickname",$quickname);
+        $doc->addChild("phonenumber",$phonenumber);
+        $doc->addChild("accountreference",$accountreference);
 
         return $doc->asXML();
+    }
+
+    public function parse($xml)
+    {
+        $account = simplexml_load_string($xml);
+        $result = $this->parseContact($account);
+        return $result;
+    }
+
+    private function parseContact($account)
+    {
+        $result = new Contact();
+        $result->id($account->contact["id"]);
+        $result->firstname($account->contact->firstname);
+        $result->lastname($account->contact->lastname);
+        $result->quickname($account->contact->quickname);
+        $result->phonenumber($account->contact->phonenumber);
+        $result->accountreference($account->contact->accountreference);
+        $result->linkContact($account->contact->link[0]["href"]);
+        $result->linkAccount($account->contact->link[1]["href"]);
+        return $result;
     }
 }

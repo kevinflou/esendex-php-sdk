@@ -2,7 +2,7 @@
 /**
  * Copyright (c) 2019, Commify Ltd.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -13,7 +13,7 @@
  *     * Neither the name of Commify nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -37,15 +37,14 @@ namespace Esendex\Model;
 class Contact
 {
     private $id;
-    private $reference;
-    private $label;
-    private $alias;
-    private $address;
-    private $type;
-    private $messagesRemaining;
-    private $expiresOn;
-    private $defaultDialCode;
-    
+    private $firstname;
+    private $lastname;
+    private $quickname;
+    private $phonenumber;
+    private $accountreference;
+    private $linkContact;
+    private $linkAccount;
+
     /**
      * @param string $value
      * @return string
@@ -62,95 +61,83 @@ class Contact
      * @param string $value
      * @return string
      */
-    public function reference($value = null)
+    public function firstname($value = null)
     {
         if ($value != null) {
-            $this->reference = (string)$value;
+            $this->firstname = (string)$value;
         }
-        return $this->reference;
+        return $this->firstname;
     }
 
     /**
      * @param string $value
      * @return string
      */
-    public function label($value = null)
+    public function lastname($value = null)
     {
         if ($value != null) {
-            $this->label = (string)$value;
+            $this->lastname = (string)$value;
         }
-        return $this->label;
+        return $this->lastname;
     }
 
     /**
      * @param string $value
      * @return string
      */
-    public function alias($value = null)
+    public function quickname($value = null)
     {
         if ($value != null) {
-            $this->alias = (string)$value;
+            $this->quickname = (string)$value;
         }
-        return $this->alias;
+        return $this->quickname;
     }
 
     /**
      * @param string $value
      * @return string
      */
-    public function address($value = null)
+    public function phonenumber($value = null)
     {
         if ($value != null) {
-            $this->address = (string)$value;
+            $this->phonenumber = (string)$value;
         }
-        return $this->address;
+        return $this->phonenumber;
     }
 
     /**
      * @param string $value
      * @return string
      */
-    public function type($value = null)
+    public function accountreference($value = null)
     {
         if ($value != null) {
-            $this->type = (string)$value;
+            $this->accountreference = (string)$value;
         }
-        return $this->type;
-    }
-
-    /**
-     * @param int $value
-     * @return int
-     */
-    public function messagesRemaining($value = null)
-    {
-        if ($value != null) {
-            $this->messagesRemaining = (int)$value;
-        }
-        return $this->messagesRemaining;
-    }
-
-    /**
-     * @param \DateTime $value
-     * @return \DateTime
-     */
-    public function expiresOn($value = null)
-    {
-        if ($value instanceof \DateTime) {
-            $this->expiresOn = $value;
-        }
-        return $this->expiresOn;
+        return $this->accountreference;
     }
 
     /**
      * @param string $value
      * @return string
      */
-    public function defaultDialCode($value = null)
+    public function linkContact($value = null)
     {
         if ($value != null) {
-            $this->defaultDialCode = (string)$value;
+            $this->linkContact = (string)$value;
         }
-        return $this->defaultDialCode;
+        return $this->linkContact;
+    }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function linkAccount($value = null)
+    {
+        if ($value != null) {
+            $this->linkAccount = (string)$value;
+        }
+        return $this->linkAccount;
     }
 }
