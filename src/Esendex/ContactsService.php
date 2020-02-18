@@ -80,6 +80,41 @@ class ContactsService
         return $this->parser->parse($data);
     }
 
+    public function editContact($id,$firstname,$lastname,$quickname,$phonenumber,$accountreference){
+        $xml = $this->parser->encode($firstname,$lastname,$quickname,$phonenumber,$accountreference);
+        $uri = Http\UriBuilder::serviceUri(
+            self::ACCOUNT_SERVICE_VERSION,
+            self::ACCOUNT_SERVICE,
+            array($id),
+            $this->httpClient->isSecure()
+        );
+
+        $data = $this->httpClient->put(
+            $uri,
+            $this->authentication,
+            $xml
+        );
+
+        return $this->parser->parse($data);
+    }
+
+    public function deleteContact($id){
+        $uri = Http\UriBuilder::serviceUri(
+            self::ACCOUNT_SERVICE_VERSION,
+            self::ACCOUNT_SERVICE,
+            array($id),
+            $this->httpClient->isSecure()
+        );
+
+        $data = $this->httpClient->delete(
+            $uri,
+            $this->authentication
+        );
+
+        return $this->parser->parse($data);
+    }
+
+
     public function getContacts(){
         $uri = Http\UriBuilder::serviceUri(
             self::ACCOUNT_SERVICE_VERSION,
