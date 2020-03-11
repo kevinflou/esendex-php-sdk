@@ -111,9 +111,8 @@ class ContactsService
             $this->authentication
         );
 
-        return $this->parser->parse($data);
+        return "OK";
     }
-
 
     public function getContacts(){
         $uri = Http\UriBuilder::serviceUri(
